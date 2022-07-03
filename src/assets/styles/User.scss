@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@600&display=swap');
+
+@font-face {
+    font-family: "Built Titling";
+    src: url("../assets/fonts/BuiltTitling.ttf");
+}
+
+.user   {
+    color: #444444;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    margin: 0;
+    grid-template-areas: 
+        "nav nav"
+        "user user";
+    grid-template-columns: 8% 92%; 
+    justify-content: center;
+    place-items: center;
+}
+
+.user-stats {
+    grid-area: user;
+    display: grid;
+    grid-template-columns: 45% 51%;
+    width: 95%;
+    gap: 2rem;
+    place-content: center;
+}
+
+.container-avatar-stats   {
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+    margin: 1.8rem auto;
+    gap: 1rem;
+    place-content: center;
+    place-items: center;
+    flex-grow: 1;
+}
+
+.markdown   {
+    width: 90%;
+    margin-top: 3rem;
+}
+
+@media (max-width: 910px) {
+    .conteiner-avatar-stats    {
+        grid-template-columns: repeat(auto-fill, minmax(90%, 1fr));
+    }
+    .user-stats {
+        grid-template-columns: 100%;
+        margin-top: 0;
+        place-items: center;
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "ghprofiles",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "author": {
+    "name": "thesrcommand"
+  },
+  "dependencies": {
+    "sass": "^1.49.0",
+    "vue": "^3.2.23",
+    "vue-router": "4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.10.2",
+    "vite": "^2.7.0"
+  }
+}
