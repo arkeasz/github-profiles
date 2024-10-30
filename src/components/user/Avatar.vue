@@ -3,12 +3,12 @@
         <img :src="this.avatar_image" :alt="this.name">
         <figcaption>
             <h3>{{ this.name }}</h3>
-            <div class="social-links">    
+            <div class="social-links">
                 <a :href="this.github" class="github">Visit Github</a>
                 <a v-if="this.twitter === ''" class="warning">Does not have twitter</a>
                 <a v-else :href="`https://twitter.com/${ this.twitter }`" class="twitter">Visit Twitter</a>
             </div>
-            <div class="stats">        
+            <div class="stats">
                 <div class="stat">
                     <p class="number"> {{ this.repos }} </p>
                     <p class="name"> Repositories </p>
@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as variables;
 
 .avatar {
     padding: 1.5rem 0;
@@ -69,13 +69,13 @@ export default {
     justify-content: center;
     gap: 1rem;
     flex-direction: column;
-    background-color: $main-color;
+    background-color: variables.$main-color;
     border-radius: 1rem;
     width: 100%;
     box-shadow: 0px 0px 24px -13px #111;
     @media (max-width: 750px) {
         width: 100%;
-        
+
     }
 }
 
@@ -100,8 +100,8 @@ figcaption  {
 h3  {
     font-family: 'Encode Sans', sans-serif;
     text-transform: uppercase;
-    font-size: clamp(1rem, 2.5vw, 1.5rem); 
-    color: $neutral-color;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: variables.$neutral-color;
     text-shadow: 0 0 .2rem #111
 }
 
@@ -122,7 +122,7 @@ a   {
     font-size: 1rem;
     border-radius: .5rem;
     font-family: 'Encode Sans', sans-serif;
-    background-color: $second-color;
+    background-color: variables.$second-color;
     transition: background-color .2s ease-in-out;
     text-align: center;
 }
@@ -139,25 +139,25 @@ a   {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    background-color: $second-color;
+    background-color: variables.$second-color;
     gap: 1rem;
     padding: .8rem 0;
     font-family: 'Encode Sans', sans-serif;
     border-radius: .7rem;
     pointer-events: none;
-    color: $neutral-color;
+    color: variables.$neutral-color;
     transition: box-shadow .5s linear;
-    border-top: 2px solid $contrast-color;
-    border-bottom: 2px solid $secondary-contrast-color;
-    border-left: 2px solid $secondary-contrast-color;
-    border-right: 2px solid $contrast-color; 
+    border-top: 2px solid variables.$contrast-color;
+    border-bottom: 2px solid variables.$secondary-contrast-color;
+    border-left: 2px solid variables.$secondary-contrast-color;
+    border-right: 2px solid variables.$contrast-color;
 }
 
 .stats .stat .number    {
     /* font-size: 1.8rem; */
-    font-size: clamp(1.5rem, 2.5vw, 2rem); 
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
 
-}   
+}
 
 a:hover    {
     background-color: #ccc;
@@ -165,18 +165,18 @@ a:hover    {
 }
 
 .twitter    {
-    color: $secondary-contrast-color
+    color: variables.$secondary-contrast-color
 }
 
 .github    {
-    color: $neutral-color
+    color: variables.$neutral-color
 }
 .warning    {
-    color: $neutral-color;
+    color: variables.$neutral-color;
     opacity: .7;
     text-shadow: 0 0 2px #111a;
     pointer-events: none;
-    background-color: $contrast-color
+    background-color: variables.$contrast-color
 }
 @media (max-width: 450px) {
     /* img */

@@ -3,15 +3,15 @@
         <figure>
             <img :src="this.userProfile.avatar_url" alt="">
             <figcaption>
-                {{ this.userProfile.login }}         
+                {{ this.userProfile.login }}
             </figcaption>
         </figure>
     </a>
 </template>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/variables' as variables;
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@600&display=swap');
-@import '@/assets/styles/variables';
 
 a   {
     text-decoration: none;
@@ -23,7 +23,7 @@ a   {
     color: #eee;
     display: flex;
     height: 100%;
-    outline: medium solid $contrast-color;
+    outline: medium solid variables.$contrast-color;
     padding: 0 var(--padding-card);
     width: calc(90% - var(--padding-card));
     overflow: hidden;

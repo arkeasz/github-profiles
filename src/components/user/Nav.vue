@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-@import '@/assets/styles/Nav.scss';
+@use '@/assets/styles/Nav.scss';
 </style>
 
 <template>
@@ -13,7 +13,7 @@
             </h1>
         </div>
         <nav :class="(this.nav == true)? 'open' : 'close' ">
-            
+
             <div class="icon-bar">
                 <Cross @click="this.close()" />
             </div>

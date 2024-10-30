@@ -1,7 +1,7 @@
 <template>
     <div class="form" >
         <form :action="'/search'" method="get">
-            <input autocomplete="off" ref="search" type="text" name="user" v-model="username" > 
+            <input autocomplete="off" ref="search" type="text" name="user" v-model="username" >
             <input type="submit" value="search">
         </form>
     </div>
@@ -26,14 +26,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as variables;
 input[type="text"]   {
     --padding-input: 1rem;
     width: calc(55% - var(--padding-input));
     min-width: calc(350px - var(--padding-input));
     height: 2.8rem;
-    background-color: $neutral-color;
-    outline: thin solid $contrast-color;
+    background-color: variables.$neutral-color;
+    outline: thin solid variables.$contrast-color;
     border: none;
     text-decoration-line: none;
     border-radius: .5rem;
@@ -70,7 +70,7 @@ input[type="submit"]    {
     outline: none;
     box-shadow: none;
     border: none;
-    background-color: $contrast-color;
+    background-color: variables.$contrast-color;
     cursor: pointer;
     padding: 1rem;
     display: flex;

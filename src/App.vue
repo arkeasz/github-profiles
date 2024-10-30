@@ -3,10 +3,10 @@
 </template>
 
 <style lang="scss">
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as variables;
 
 body  {
-  background: $main-color;
+  background: variables.$main-color;
 }
 
 #app {

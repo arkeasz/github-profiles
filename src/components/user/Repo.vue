@@ -2,8 +2,8 @@
     <a :href="this.link" class="repo" target="_blank" >
             <h3>Random Repository</h3>
             <figure class="repository">
-                <img 
-                    :src=" '/lang/' + this.tech.toLowerCase() + '.svg' " 
+                <img
+                    :src=" '/lang/' + this.tech.toLowerCase() + '.svg' "
                     :alt="this.tech.toLowerCase()"
                     :class="
                         (
@@ -33,11 +33,11 @@
 
 <style lang="scss" scoped>
 
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as variables;
 .repo   {
     text-decoration: none;
     width: calc(90% - 1rem);
-    background-color: $second-color;
+    background-color: variables.$second-color;
     padding: 1rem;
     border-radius: .8rem;
     color: #eee;
@@ -49,7 +49,7 @@
 
 h3  {
     font-size: 1.2rem;
-    color: $neutral-color;
+    color: variables.$neutral-color;
 }
 .repository    {
     display: flex;
@@ -64,14 +64,14 @@ figure   {
 .name   {
     width: 100%;
     text-align: center;
-    color: $neutral-color;
+    color: variables.$neutral-color;
     font-size: 1.3rem
 }
 
 .license    {
     font-size: 1rem;
     text-align: center;
-    color: $neutral-color;
+    color: variables.$neutral-color;
 }
 
 .tech {
@@ -101,7 +101,7 @@ figcaption  {
     width: 80%;
     align-items: center;
     justify-content: center;
-    color: $neutral-color;
+    color: variables.$neutral-color;
     gap: 1rem;
     font-size: 1.5rem
 }

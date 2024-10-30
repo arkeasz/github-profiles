@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-@import '@/assets/styles/RepoPreview.scss';
+@use '@/assets/styles/RepoPreview.scss';
 </style>
 <template>
     <a :href="this.href" class="repo-preview" target="_blank" :class="(lang == null) ? 'markdown': lang.toLowerCase()">

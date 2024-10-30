@@ -1,4 +1,4 @@
-@import '@/assets/styles/variables';
+@use 'variables' as variables;
 .repo-preview   {
     $padding: 1rem;
     border-radius: 10px;
@@ -9,7 +9,7 @@
     width: calc(100% - $padding);
     padding: 0 $padding;
     height: 100%;
-    background: $second-color;
+    background: variables.$second-color;
     box-shadow: 0 0 32px -10px #000;
     text-decoration: none;
     position: relative;
@@ -32,7 +32,7 @@
         &:hover::after  {
             background: #9992;
             clip-path: circle(141.4% at 0 100%);
-        }   
+        }
     .about   {
         color: #eee;
         flex-grow: 1;
@@ -52,32 +52,32 @@
     &.html  {
         background-color: #ff3300;
         .name   {
-            color: $neutral-color
+            color: variables.$neutral-color
         }
 
         img {
-            filter: drop-shadow(0 0 15px #dd2c00)    
+            filter: drop-shadow(0 0 15px #dd2c00)
         }
-    }  
+    }
     &.javascript    {
         background-color: rgba(255, 217, 0, 0.733);
     }
     &.css, &.go   {
         background-color: #1684ce;
         img {
-            filter: drop-shadow(0 0 10px #008ee08a)    
+            filter: drop-shadow(0 0 10px #008ee08a)
         }
     }
     &.rust, &.handlebars, &.markdown  {
-        background-color: $neutral-color;
+        background-color: variables.$neutral-color;
         .about   {
-            color: $main-color
+            color: variables.$main-color
         }
     }
     &.vue   {
         background: #02943f;
         img {
-            filter: drop-shadow(0 0 10px #005713)    
+            filter: drop-shadow(0 0 10px #005713)
         }
     }
 }

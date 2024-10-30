@@ -1,10 +1,10 @@
 <template>
     <figure>
         <img lazy="load"  :src="
-                    '/lang/' + 
+                    '/lang/' +
                     (
-                        (this.lang.toLowerCase() == 'c#')? 'csharp' : 
-                        // (this.lang.toLowerCase() == 'scss')? 'sass' : 
+                        (this.lang.toLowerCase() == 'c#')? 'csharp' :
+                        // (this.lang.toLowerCase() == 'scss')? 'sass' :
                         this.lang.toLowerCase()
                     )
                     + '.svg'"
@@ -26,13 +26,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/variables' as variables;
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@600&display=swap');
-@import '@/assets/styles/variables';
 
 figure  {
     height: 100%;
     width: 100%;
-    background-color: $second-color;
+    background-color: variables.$second-color;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,7 +80,7 @@ figcaption  {
     font-size: 1rem;
     text-align: center;
     font-family: 'Encode Sans', sans-serif;
-    color: $neutral-color;
+    color: variables.$neutral-color;
     display: flex;
     flex-direction: column;
     align-items: center;

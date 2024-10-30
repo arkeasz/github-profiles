@@ -1,4 +1,4 @@
-@import '@/assets/styles/variables';
+@use 'variables' as variables;
 
 @mixin flex-center  {
     display: flex;
@@ -16,7 +16,7 @@ header  {
     background-color: #2a2d38;
     overflow: hidden;
     width: 100%;
-    
+
     nav {
         display: flex;
         overflow: hidden;
@@ -29,7 +29,7 @@ header  {
         overflow: auto;
         width: 100vw;
         height: 100vh;
-        background-color: $contrast-color;
+        background-color: variables.$contrast-color;
         z-index: 800;
             .icon-bar   {
                 position: fixed;
@@ -61,7 +61,7 @@ header  {
                 grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
                 gap: 3rem;
                 grid-auto-rows: 12rem;
-                place-items: center; 
+                place-items: center;
                 @media (max-width: 800px)   {
                     width: 90%;
                 }
@@ -70,7 +70,7 @@ header  {
                     text-decoration: none;
                     width: 90%;
                     height: 100%;
-                    background-color: $second-color;
+                    background-color: variables.$second-color;
                     display: flex;
                     justify-content: center;
                     flex-direction: column;
@@ -108,7 +108,7 @@ header  {
         flex-direction: row-reverse;
         flex-shrink: 1;
         justify-content: space-between;
-        background-color: $contrast-color;
+        background-color: variables.$contrast-color;
         width: 100%;
         border-bottom: 1px solid #2a2d38;
         align-items: center;
@@ -131,7 +131,7 @@ header  {
             right: 2%;
 
             svg {
-                fill: $neutral-color;
+                fill: variables.$neutral-color;
                 cursor: pointer
             }
         }
