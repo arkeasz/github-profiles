@@ -9,12 +9,12 @@
     "name": "thesrcommand"
   },
   "dependencies": {
-    "sass": "^1.49.0",
-    "vue": "^3.2.23",
-    "vue-router": "4"
+    "sass": "1.80.4",
+    "vue": "3.5.12",
+    "vue-router": "4.4.5"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.10.2",
-    "vite": "^2.7.0"
+    "@vitejs/plugin-vue": "5.1.4",
+    "vite": "5.4.10"
   }
 }
