@@ -5,21 +5,18 @@
 <template>
     <section class="user">
         <Nav />
-        <div class="user-stats">    
+        <div class="user-stats">
             <div class="container-avatar-stats">
-                <Avatar 
+                <Avatar
                     :name="this.name"
                     :avatar_image="this.avatar_image"
                     :twitter="(this.twitter == null)? '' : this.twitter"
                     :github="this.github"
-                    :repos="this.total_repos" 
-                    :followers="this.followers" 
+                    :repos="this.total_repos"
+                    :followers="this.followers"
                     :following="this.following"
                 />
                 <Stats />
-            </div>
-            <div class="markdown">
-                <div v-html="markdown"></div>
             </div>
         </div>
     </section>
@@ -49,24 +46,13 @@ export default {
         let total_repos = ref(0)
         let followers = ref(0)
         let following = ref(0)
-        let markdown = ref("")
-        
 
-        const fetchMarkdown = async () =>    {
-            const obj = await fetch("https://ghpapi.herokuapp.com/u/" + getUser)
-            const data = await obj.json();
-            markdown.value = (data.md == null)? '<h1>MARKDOWN NOT FOUND</h1>' : data.md 
 
-        }
 
         const fetchUserData = async () =>    {
-            const obj = await fetch("https://api.github.com/users/" + getUser, {
-                headers: {
-                    "Authorization": "Bearer "+import.meta.env.VITE_APP_GHTOKEN
-                }
-            })
+            const obj = await fetch("https://ghprofileapi.vercel.app/get-profile/" + getUser)
             const data = await obj.json();
-
+            console.log(data)
             avatar_image.value = data.avatar_url
             name.value = data.login
             github.value = data.html_url,
@@ -78,7 +64,7 @@ export default {
         }
 
         fetchUserData()
-        fetchMarkdown()
+
         return  {
             avatar_image,
             name,
@@ -86,8 +72,7 @@ export default {
             twitter,
             total_repos,
             followers,
-            following,
-            markdown
+            following
         }
     }
 }

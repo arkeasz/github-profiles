@@ -2,8 +2,8 @@
     <section class="repositories">
         <Nav/>
         <div class="repo-preview-container" >
-            <RepoPreview 
-                v-for="repo in repositories" 
+            <RepoPreview
+                v-for="repo in repositories"
                 :key="repo.id"
                 :name="repo.name"
                 :href="repo.html_url"
@@ -15,8 +15,8 @@
 </template>
 
 <style lang="scss" scoped>
+@use '@/assets/styles/variables' as variables;
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@600&display=swap');
-@import '@/assets/styles/variables';
 .repo-preview-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -44,12 +44,7 @@ export default {
 
         const fetchRepositories = async () =>    {
 
-            let data = await useFetch("https://api.github.com/users/" + getUser + "/repos", {
-                    headers: {
-                        "Authorization": "Bearer " + import.meta.env.VITE_APP_GHTOKEN
-                    }
-                })
-    
+            let data = await useFetch("https://ghprofileapi.vercel.app/get-repos/" + getUser)
             repositoriesPromise.value = data.value.map(repo => repo);
 
 
@@ -60,7 +55,7 @@ export default {
                     for (let i = 0; i < 8; i++) {
                         const objRepo = await fetch(repos[i].languages_url)
                         const dataRepo = await objRepo.json()
-                        repos[i].tech_star = Object.keys(dataRepo)[0] 
+                        repos[i].tech_star = Object.keys(dataRepo)[0]
                         newrepos.value.push(repos[i])
                     }
 

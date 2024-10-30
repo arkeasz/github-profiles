@@ -6,7 +6,7 @@
             </div>
             <figure>
 
-                <img 
+                <img
                     :src="'/lang/' + this.getTechStar.toLowerCase()  + '.svg'"
                     :class="
                             (
@@ -15,7 +15,7 @@
                             )
                             ? 'white-icon'
                             : ''
-                    " 
+                    "
                     :alt="this.getTechStar"
                     :title="this.getTechStar"
                 >
@@ -27,7 +27,7 @@
 </template>
 
 <style lang="scss">
-@import '@/assets/styles/Stats.scss';
+@use '@/assets/styles/Stats.scss';
 </style>
 
 <script>
@@ -66,47 +66,44 @@ export default {
         let linkRepoRandom = ref("")
 
         const fetchRepositories = async() => {
-            
-            let data = await useFetch("https://api.github.com/users/" + getUser + "/repos", {
-                        headers: {
-                            "Authorization": "Bearer " + import.meta.env.VITE_APP_GHTOKEN
-                        }
-                    })
+
+            let data = await useFetch("https://ghprofileapi.vercel.app/get-repos/" + getUser)
             return data.value
         }
 
         repositories.value  = fetchRepositories();
+        console.log(repositories)
 
         Promise.resolve(repositories.value)
-            .then(repos =>    {
-                console.log(repos)
+            .then(async (repos) =>    {
                 let languagesR = []
-                repos.forEach(async(repo) =>   {
-                    const objLang = await fetch(repo.languages_url, {
-                        headers: {
-                            "Authorization": "Bearer "+import.meta.env.VITE_APP_GHTOKEN
-                        }
-                    })
-                    const dataLang = await objLang.json()
+                const languagePromises = repos.map(async (repo) => {
+                    const objLang = await fetch(
+                        "https://ghprofileapi.vercel.app/get-repo/" + getUser + "/" + repo.name + "/languages"
+                    );
+                    const dataLang = await objLang.json();
 
                     if (Object.keys(dataLang)[0] === undefined) {
-                        if (Object.keys(dataLang) > 1 ) {
-                            languagesR.push(Object.keys(dataLang)[1])
-                        } else  {
-                            languages.value.push('markdown')
+                        if (Object.keys(dataLang).length > 1) {
+                        languagesR.push(Object.keys(dataLang)[1]);
+                        } else {
+                        languagesR.push("markdown");
                         }
-                    } else  {
-                        languages.value.push(Object.keys(dataLang)[0])
+                    } else {
+                        languagesR.push(Object.keys(dataLang)[0]);
                     }
-                    
-                })
-                let numRandom = Math.floor(Math.random() * repos.length)
-                repoRandom.value = repos[numRandom]
-                license.value = (repoRandom.value.license === null)? '' : repoRandom.value.license.name;
-                nameRepo.value = repoRandom.value.name
-                techRepoRandom.value = (repoRandom.value.language === null)? '' : repoRandom.value.language
-                star.value = repoRandom.value.stargazers_count
-                linkRepoRandom.value = repoRandom.value.html_url
+                });
+
+            await Promise.all(languagePromises);
+            languages.value = languagesR;
+
+            let numRandom = Math.floor(Math.random() * repos.length);
+            repoRandom.value = repos[numRandom];
+            license.value = repoRandom.value.license ? repoRandom.value.license.name : "";
+            nameRepo.value = repoRandom.value.name;
+            techRepoRandom.value = repoRandom.value.language || "";
+            star.value = repoRandom.value.stargazers_count;
+            linkRepoRandom.value = repoRandom.value.html_url;
         })
 
         return  {

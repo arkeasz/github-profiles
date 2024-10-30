@@ -20,10 +20,11 @@
     border-radius: 1rem;
 }
 </style>
-
 <script>
 import { ref } from '@vue/reactivity';
 import Tech from './Lang.vue'
+import { useFetch } from "@/hooks/useFetch"
+import getUser from '@/helpers/userPath.js'
 
 export default {
     components: {
@@ -41,33 +42,24 @@ export default {
         const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
         const fetchLanguages = async() =>   {
-            let obj = await fetch('https://api.github.com/users/' + userPath + '/repos', {
-                                headers:    {
-                                    'Authorization': 'Bearer ' + import.meta.env.VITE_APP_GHTOKEN
-                                }
-                            })
+            let obj = await fetch("https://ghprofileapi.vercel.app/get-repos/" + getUser)
             let data = obj.json()
             return data
         }
-        
+
         repositories.value = fetchLanguages()
-        
+
         let promisesRepos = []
 
         Promise.resolve(repositories.value)
             .then(repos =>   {
-                
+
                 let reposArray = repos.map(repo => repo.name)
 
-                for(let i = 0; i < reposArray.length; i++)    {                    
-                    promisesRepos.push(fetch('https://api.github.com/repos/' + userPath + '/' + reposArray[i] + '/languages', {
-                                            headers:    {
-                                                'Authorization': 'Bearer ' + import.meta.env.VITE_APP_GHTOKEN
-                                            }
-                                        })
-                                    )
+                for(let i = 0; i < reposArray.length; i++)    {
+                    promisesRepos.push(fetch('https://ghprofileapi.vercel.app/get-repo/' + userPath + '/' + reposArray[i] + '/languages'))
                 }
-            
+
                 Promise.all(promisesRepos)
                         .then(data =>    {
                             data.forEach(val => {
@@ -77,7 +69,7 @@ export default {
                                         languages.value = languages.value.filter( onlyUnique )
                                     })
                             })
-                        })  
+                        })
 
             })
 

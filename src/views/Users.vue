@@ -1,13 +1,14 @@
 <template>
     <Nav />
-    <div v-if="this.userCount > 0" class="users-container">
+    <div v-if="isLoading" class="loading">
+        Loading...
+    </div>
+    <div v-else-if="userCount > 0" class="users-container">
         <UserPreview v-for="profile in usersProfiles" :userProfile="profile" :key="profile.id"/>
     </div>
     <div v-else class="not-found">
             not found account
     </div>
-    
-
 </template>
 
 <style scoped>
@@ -29,7 +30,7 @@
         width: calc(100% - var(--padding-users-container));
     }
 }
-.not-found  {
+.not-found, .loading  {
     padding: 1.8rem 0;
     width: 100%;
     min-height: calc(100vh - 4.8rem);
@@ -50,27 +51,30 @@ import Nav from "../components/NavBar.vue"
 import { ref } from '@vue/reactivity'
 export default  {
     setup() {
-        
-        let locationPathUser = new URL(location.href).searchParams.get("user");;
-        locationPathUser = locationPathUser.replace(/search\//ig, "" ).replace(/\//ig, "")  
+        let locationPathUser = new URL(location.href).searchParams.get("user");
+        locationPathUser = locationPathUser.replace(/search\//ig, "" ).replace(/\//ig, "")
 
-        let usersProfiles = ref([])
-        let userCount = ref(0)
-        const fetchUsers = async () =>    {
-            const obj = await fetch(`https://api.github.com/search/users?q=` + locationPathUser, {
-                                headers:    {
-                                    'Authorization': 'Bearer ' + import.meta.env.VITE_APP_GHTOKEN
-                                }
-                            })
-            const data = await obj.json();
-            usersProfiles.value = data.items.map(e => e)
-            userCount.value = data.total_count
-        }
+        let usersProfiles = ref([]);
+        let userCount = ref(0);
+        const isLoading = ref(true);
 
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch(`https://ghprofileapi.vercel.app/search-users?q=${locationPathUser}`);
+                const data = await response.json();
+                usersProfiles.value = data.items || [];
+                userCount.value = data.total_count
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            } finally {
+                isLoading.value = false;
+            }
+        };
         fetchUsers()
         return  {
             usersProfiles,
-            userCount
+            userCount,
+            isLoading
         }
     },
     components: {
