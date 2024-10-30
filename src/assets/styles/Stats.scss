@@ -1,5 +1,5 @@
 
-@import '@/assets/styles/variables';
+@use 'variables';
 
 .about  {
     border-radius: 1rem;
@@ -27,7 +27,7 @@
 }
 
 .title   {
-    color: $neutral-color;
+    color: variables.$neutral-color;
     font-size: 1.2rem;
     padding: .4rem;
 }
@@ -50,7 +50,7 @@
     &.white-icon    {
         filter: invert(150%)
     }
-    
+
 }
 
 .tech-star figure figcaption    {

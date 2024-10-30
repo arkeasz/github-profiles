@@ -1,8 +1,8 @@
 <template>
     <header>
         <h1 class="logo">
-            GHProfile    
-        </h1>        
+            GHProfile
+        </h1>
         <div class="nav-desktop">
             <form action="/search" method="get" autocomplete="off">
                 <input type="text" name="user" v-model="username">
@@ -30,7 +30,7 @@ export default {
         }
     },
     methods:    {
-        toSearchProfile() {            
+        toSearchProfile() {
             (this.username === '')? this.$router.push({ name: 'Home' }) : this.$router.push({path: `/search?user=${this.username}`})
         },
         showNavBar()    {
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables';
+@use '@/assets/styles/variables' as variables;
 
 @font-face {
     font-family: "Built Titling";
@@ -52,7 +52,7 @@ export default {
 }
 
 header  {
-    background-color: $second-color;
+    background-color: variables.$second-color;
     height: 4rem;
     width: 100%;
     box-shadow: 0px 22px 19px -11px #111;
@@ -64,12 +64,12 @@ header  {
     justify-content: center;
     gap: 2rem;
     border-bottom: .1rem solid #2a2d38;
-    
+
     .logo   {
         text-align: center;
         font-size: 2.5rem;
         font-family: "Built Titling";
-        color: $contrast-color;
+        color: variables.$contrast-color;
     }
 }
 
