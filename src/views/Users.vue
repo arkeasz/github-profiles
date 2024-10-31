@@ -60,7 +60,12 @@ export default  {
 
         const fetchUsers = async () => {
             try {
-                const response = await fetch(`https://ghprofileapi.vercel.app/search-users?q=${locationPathUser}`);
+                const response = await fetch(`https://ghprofileapi.vercel.app/search-users?q=${locationPathUser}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
                 const data = await response.json();
                 usersProfiles.value = data.items || [];
                 userCount.value = data.total_count

@@ -44,7 +44,12 @@ export default {
 
         const fetchRepositories = async () =>    {
 
-            let data = await useFetch("https://ghprofileapi.vercel.app/get-repos/" + getUser)
+            let data = await useFetch("https://ghprofileapi.vercel.app/get-repos/" + getUser, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             repositoriesPromise.value = data.value.map(repo => repo);
 
 
@@ -53,7 +58,12 @@ export default {
                     repositories.value = await repos
 
                     for (let i = 0; i < 8; i++) {
-                        const objRepo = await fetch(repos[i].languages_url)
+                        const objRepo = await fetch(repos[i].languages_url, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
                         const dataRepo = await objRepo.json()
                         repos[i].tech_star = Object.keys(dataRepo)[0]
                         newrepos.value.push(repos[i])

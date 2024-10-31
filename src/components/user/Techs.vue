@@ -42,7 +42,12 @@ export default {
         const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
         const fetchLanguages = async() =>   {
-            let obj = await fetch("https://ghprofileapi.vercel.app/get-repos/" + getUser)
+            let obj = await fetch("https://ghprofileapi.vercel.app/get-repos/" + getUser, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             let data = obj.json()
             return data
         }
@@ -57,7 +62,12 @@ export default {
                 let reposArray = repos.map(repo => repo.name)
 
                 for(let i = 0; i < reposArray.length; i++)    {
-                    promisesRepos.push(fetch('https://ghprofileapi.vercel.app/get-repo/' + userPath + '/' + reposArray[i] + '/languages'))
+                    promisesRepos.push(fetch('https://ghprofileapi.vercel.app/get-repo/' + userPath + '/' + reposArray[i] + '/languages', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }))
                 }
 
                 Promise.all(promisesRepos)

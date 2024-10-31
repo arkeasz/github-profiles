@@ -50,7 +50,12 @@ export default {
 
 
         const fetchUserData = async () =>    {
-            const obj = await fetch("https://ghprofileapi.vercel.app/get-profile/" + getUser)
+            const obj = await fetch("https://ghprofileapi.vercel.app/get-profile/" + getUser, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
             const data = await obj.json();
             console.log(data)
             avatar_image.value = data.avatar_url
